@@ -1,13 +1,12 @@
-version: '2.13'
-
 services:
   db:
     image: postgres:13.0-alpine
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     restart: always
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env
+      - postgres-value:/var/lib/postgresql/data/
 
   web:
     build: ../api_yamdb
@@ -17,8 +16,6 @@ services:
       - media_value:/app/media/
     depends_on:
       - db
-    env_file:
-      - ./.env
 
   nginx:
     image: nginx:1.21.3-alpine
@@ -35,3 +32,4 @@ services:
 volumes:
   static_value:
   media_value:
+  postgres-value:
