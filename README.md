@@ -78,7 +78,7 @@
 команду:
 
    ```bash
-   docker-compose exec web python manage.py loaddata fixtures.json
+   docker-compose exec web python manage.py dumpdata > fixtures.json
    ```
 
 8. Создать суперпользователя
